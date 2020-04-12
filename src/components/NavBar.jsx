@@ -1,14 +1,18 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from 'react';
+import React, { useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faListUl,
     faHourglass,
-    faArchive,
+    faTimes,
+    faCheck,
 } from '@fortawesome/free-solid-svg-icons';
+import { UserContext } from '../context/userContext';
 
-const NavBar = () => {
+const NavBar = ({ getSearch }) => {
+    const { setSearchShop } = useContext(UserContext);
+
     return (
         <nav className='navbar navbar-expand-lg navbar-light bg-light'>
             <a className='navbar-brand' href='#'></a>
@@ -42,8 +46,12 @@ const NavBar = () => {
                             &nbsp;Pendings
                         </button>
                         <button type='button' className='btn btn-secondary'>
-                            <FontAwesomeIcon icon={faArchive} />
-                            &nbsp;Archived
+                            <FontAwesomeIcon icon={faTimes} />
+                            &nbsp;Rejected
+                        </button>
+                        <button type='button' className='btn btn-secondary'>
+                            <FontAwesomeIcon icon={faCheck} />
+                            &nbsp;Accepted
                         </button>
                     </div>
                 </ul>
@@ -54,10 +62,18 @@ const NavBar = () => {
                         placeholder='Search a car shops'
                         aria-label='Search'
                         name='search'
+                        onKeyUp={(e) => {
+                            e.preventDefault();
+                            setSearchShop(e.target.value);
+                            getSearch();
+                        }}
                     />
                     <button
                         className='btn btn-outline-primary my-2 my-sm-0'
-                        type='submit'
+                        type='button'
+                        onClick={() => {
+                            getSearch();
+                        }}
                     >
                         Search
                     </button>

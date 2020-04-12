@@ -5,6 +5,7 @@ export const useForm = (initialState) => {
     return [
         values,
         (e) => {
+            e.preventDefault();
             setvalues({
                 ...values,
                 [e.target.name]: e.target.value,

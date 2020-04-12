@@ -15,6 +15,14 @@ const Badge = ({ status }) => {
             case 'REJECTED':
                 jsxBadge = <span className='badge badge-danger'>Rejected</span>;
                 break;
+            case 'DECLINED':
+                jsxBadge = <span className='badge badge-danger'>Rejected</span>;
+                break;
+            case true:
+                jsxBadge = (
+                    <span className='badge badge-success'>Accepted</span>
+                );
+                break;
             default:
                 jsxBadge = <span className='badge badge-warning'>Archive</span>;
                 break;

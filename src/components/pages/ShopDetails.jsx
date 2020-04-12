@@ -11,7 +11,7 @@ import GoogleMaps from '../GoogleMaps';
 import Badge from './Badge';
 
 const ShopDetails = () => {
-    const { selectedShop, setShops, shopsList } = useContext(UserContext);
+    const { selectedShop } = useContext(UserContext);
 
     const updateStatus = (id, statuses) => {
         firebase
