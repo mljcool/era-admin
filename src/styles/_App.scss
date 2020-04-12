@@ -5,8 +5,16 @@
     }
     &.container {
         margin-top: 30px;
+        .navbar {
+            color: white !important;
+            border-radius: 3px !important;
+            box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
+                0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+                0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+        }
     }
     .title-page {
+        text-shadow: 1px 1px 2px #777;
         color: #777;
         padding: 25px 0px;
         display: flex;
@@ -14,10 +22,44 @@
     }
     .list-group-item {
         cursor: pointer;
+        color: #798082;
+        text-align: left;
+        .title-list {
+            padding: 4px;
+            .shop-name {
+                margin-left: 7px;
+            }
+        }
+        &:hover {
+            color: #798082;
+            text-decoration: none !important;
+            box-shadow: 1px 3px 2px -1px rgba(0, 0, 0, 0.2),
+                0px 2px 2px 1px rgba(0, 0, 0, 0.14),
+                0px 2px 4px 1px rgba(0, 0, 0, 0.12);
+        }
+        .shop-date {
+            font-style: italic;
+            font-size: 15px;
+        }
+        .badge {
+            padding: 5px;
+        }
     }
 
     .card-details {
         padding: 25px 0px;
+        .main-details {
+            box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
+                0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+                0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+            .card-header {
+                display: flex;
+                justify-content: space-between;
+                .badge {
+                    padding-top: 5px;
+                }
+            }
+        }
     }
     &.card {
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);

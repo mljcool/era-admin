@@ -22,9 +22,21 @@ const NavBar = () => {
                 id='navbarSupportedContent'
             >
                 <ul className='navbar-nav mr-auto  '>
-                    <li className='nav-item btn-outline-primary btn-sm margin-l'>
-                        <a className='nav-link '>Log-out</a>
-                    </li>
+                    <div
+                        className='btn-group mr-2'
+                        role='group'
+                        aria-label='First group'
+                    >
+                        <button type='button' className='btn btn-secondary'>
+                            All List
+                        </button>
+                        <button type='button' className='btn btn-secondary'>
+                            Pendings
+                        </button>
+                        <button type='button' className='btn btn-secondary'>
+                            Archived
+                        </button>
+                    </div>
                 </ul>
                 <form className='form-inline my-2 my-lg-0'>
                     <input
