@@ -1,26 +1,40 @@
 import React from 'react';
-import { compose, withProps } from 'recompose';
-import {
-    withScriptjs,
-    withGoogleMap,
-    GoogleMap,
-    Marker,
-} from 'react-google-maps';
+import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 
-export const MyMapComponent = compose(
-    withProps({
-        googleMapURL:
-            'https://maps.googleapis.com/maps/api/js?key=AIzaSyCM9feJhmKCUUsDv9zg6dQcYeAHEAHwM08&v=3.exp&libraries=geometry,drawing,places',
-        loadingElement: <div style={{ height: `100%` }} />,
-        containerElement: <div style={{ height: `400px` }} />,
-        mapElement: <div style={{ height: `100%` }} />,
-    }),
-    withScriptjs,
-    withGoogleMap
-)((props) => (
-    <GoogleMap defaultZoom={8} defaultCenter={{ lat: -34.397, lng: 150.644 }}>
-        {props.isMarkerShown && (
-            <Marker position={{ lat: -34.397, lng: 150.644 }} />
-        )}
-    </GoogleMap>
-));
+const mapContainerStyle = {
+    height: '400px',
+    width: 'auto',
+};
+
+const GoogleMaps = ({ selectedShopData }) => {
+    const currentPosition = {
+        lat: parseFloat(
+            (selectedShopData.functionalLocation || {}).latitude ||
+                7.069250800000001
+        ),
+        lng: parseFloat(
+            (selectedShopData.functionalLocation || {}).longitude || 125.611285
+        ),
+    };
+    return (
+        <LoadScript
+            id='script-loader'
+            googleMapsApiKey='AIzaSyCM9feJhmKCUUsDv9zg6dQcYeAHEAHwM08'
+        >
+            <GoogleMap
+                id='example-map'
+                mapContainerStyle={mapContainerStyle}
+                zoom={16}
+                center={currentPosition}
+            >
+                <Marker
+                    key={selectedShopData.id}
+                    title={selectedShopData.mainName}
+                    position={currentPosition}
+                />
+            </GoogleMap>
+        </LoadScript>
+    );
+};
+
+export default GoogleMaps;

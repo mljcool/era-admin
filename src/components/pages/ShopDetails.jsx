@@ -5,22 +5,41 @@ import {
     faTimes,
     faCheck,
 } from '@fortawesome/free-solid-svg-icons';
-
+import firebase from '../../config/firebaseConfig';
 import { UserContext } from '../../context/userContext';
+import GoogleMaps from '../GoogleMaps';
 import Badge from './Badge';
 
 const ShopDetails = () => {
     const { selectedShop, setShops, shopsList } = useContext(UserContext);
 
+    const updateStatus = (id, statuses) => {
+        firebase
+            .firestore()
+            .collection('autoShop')
+            .doc(id)
+            .update({
+                status: statuses,
+            })
+            .then(() => {});
+    };
+
     return (
         <div className='card main-details'>
             <div className='card-header'>
-                <span>Shop Details</span>
+                <span>
+                    Shop Details: <b>({selectedShop.mainName || ''})</b>
+                </span>
                 <Badge status={selectedShop.status} />
             </div>
             <div className='card-body'>
-                {/* <pre>{JSON.stringify(selectedShop, null, 2)}</pre> */}
-                <h5 className='card-title'>{selectedShop.mainName || ''}</h5>
+                {/* <pre>
+                    {JSON.stringify(
+                        (selectedShop.functionalLocation || {}).longitude || '',
+                        null,
+                        2
+                    )}
+                </pre> */}
                 <div className='row'>
                     <div className='col-md-12 '>
                         <form className='needs-validation'>
@@ -135,25 +154,19 @@ const ShopDetails = () => {
                             id='multiCollapseExample1'
                         >
                             <div className='card card-body '>
-                                {/* <MyMapComponent isMarkerShown /> */}
+                                <GoogleMaps selectedShopData={selectedShop} />
                             </div>
                         </div>
                     </div>
                 </div>
+                <hr></hr>
                 <div className='row'>
                     <div className='col-md-12 button-footers'>
                         <a
                             href='#sample'
                             className='btn btn-danger'
                             onClick={() => {
-                                setShops(
-                                    shopsList.map((data) => {
-                                        if (selectedShop.uid === data.uid) {
-                                            data.status = 'REJECTED';
-                                        }
-                                        return data;
-                                    })
-                                );
+                                updateStatus(selectedShop.id, 'REJECTED');
                             }}
                         >
                             <FontAwesomeIcon icon={faTimes} /> Reject
@@ -162,14 +175,7 @@ const ShopDetails = () => {
                             href='#sample'
                             className='btn btn-success'
                             onClick={() => {
-                                setShops(
-                                    shopsList.map((data) => {
-                                        if (selectedShop.uid === data.uid) {
-                                            data.status = 'ACCEPTED';
-                                        }
-                                        return data;
-                                    })
-                                );
+                                updateStatus(selectedShop.id, 'ACCEPTED');
                             }}
                         >
                             <FontAwesomeIcon icon={faCheck} /> Accept

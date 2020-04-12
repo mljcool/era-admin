@@ -5,7 +5,7 @@ import ShopList from './pages/ShopList';
 import ShopDetails from './pages/ShopDetails';
 import Login from './pages/Login';
 import { UserContext } from '../context/userContext';
-import { shops } from '../constants/dummyShop';
+import firebase from '../config/firebaseConfig';
 const App = () => {
     const [loginState, setloginState] = useState(false);
     const [shopsList, setShops] = useState([]);
@@ -14,9 +14,16 @@ const App = () => {
     useEffect(() => {
         setloginState(localStorage.getItem('isLogin'));
         (async () => {
-            const allShop = await shops();
-            setShops(allShop);
-            setSelectedShops(allShop[0]);
+            const getData = firebase.firestore().collection('autoShop');
+            getData.onSnapshot((snapshot) => {
+                const allShop = snapshot.docs.map((shop) => ({
+                    id: shop.id,
+                    ...shop.data(),
+                }));
+                setShops(allShop);
+                setSelectedShops(allShop[0]);
+                console.log(allShop);
+            });
         })();
     }, []);
     return (
