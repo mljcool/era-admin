@@ -1,6 +1,12 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+    faListUl,
+    faHourglass,
+    faArchive,
+} from '@fortawesome/free-solid-svg-icons';
 
 const NavBar = () => {
     return (
@@ -28,13 +34,16 @@ const NavBar = () => {
                         aria-label='First group'
                     >
                         <button type='button' className='btn btn-secondary'>
-                            All List
+                            <FontAwesomeIcon icon={faListUl} />
+                            &nbsp; All List
                         </button>
                         <button type='button' className='btn btn-secondary'>
-                            Pendings
+                            <FontAwesomeIcon icon={faHourglass} />
+                            &nbsp;Pendings
                         </button>
                         <button type='button' className='btn btn-secondary'>
-                            Archived
+                            <FontAwesomeIcon icon={faArchive} />
+                            &nbsp;Archived
                         </button>
                     </div>
                 </ul>

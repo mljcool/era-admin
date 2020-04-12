@@ -1,49 +1,42 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCar } from '@fortawesome/free-solid-svg-icons';
+import { UserContext } from '../../context/userContext';
+import Badge from './Badge';
 
 const ShopList = () => {
-    const list = [
-        {
-            id: 1,
-            name: 'Sample Shop 1',
-        },
-        {
-            id: 2,
-            name: 'Sample Shop 2',
-        },
-        {
-            id: 3,
-            name: 'Sample Shop 3',
-        },
-        {
-            id: 4,
-            name: 'Sample Shop 4',
-        },
-        {
-            id: 5,
-            name: 'Sample Shop 5',
-        },
-    ];
+    const { shopsList, selectedShop, setSelectedShops } = useContext(
+        UserContext
+    );
 
     return (
         <Fragment>
             <div className='list-group' id='list-tab' role='tablist'>
-                {list.map((data) => (
+                {shopsList.map((data) => (
                     <a
-                        key={data.id}
-                        className='list-group-item'
+                        key={data.uid}
+                        className='list-group-item '
                         href='#list-home'
                         role='tab'
                         aria-controls='home'
+                        onClick={() => {
+                            setSelectedShops(data);
+                        }}
+                        style={
+                            data.uid === selectedShop.uid
+                                ? { background: '#d4d4d4' }
+                                : {}
+                        }
                     >
                         <small className='shop-date'>Monday 20, 2019</small>
                         <div className='d-flex justify-content-between align-items-center'>
                             <div className='title-list'>
                                 <FontAwesomeIcon icon={faCar} />
-                                <span className='shop-name'>{data.name}</span>
+                                <span className='shop-name'>
+                                    {data.mainName}
+                                </span>
                             </div>
-                            <span className='badge badge-primary'>Pending</span>
+                            <Badge status={data.status} />
                         </div>
                     </a>
                 ))}

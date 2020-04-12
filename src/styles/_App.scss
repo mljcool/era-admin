@@ -12,6 +12,19 @@
                 0px 1px 1px 0px rgba(0, 0, 0, 0.14),
                 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
         }
+        &.login {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            form {
+                width: 400px;
+                margin-top: 50px;
+                padding: 50px;
+                box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
+                    0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+                    0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+            }
+        }
     }
     .title-page {
         text-shadow: 1px 1px 2px #777;
@@ -58,6 +71,14 @@
                 .badge {
                     padding-top: 5px;
                 }
+            }
+            .toggle-map {
+                text-align: left;
+            }
+            .button-footers {
+                padding-top: 20px;
+                display: flex;
+                justify-content: space-evenly;
             }
         }
     }
