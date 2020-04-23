@@ -15,11 +15,15 @@ const App = () => {
     const [searchShop, setSearchShop] = useState('');
 
     useEffect(() => {
+        if (shopsList.length) {
+            return;
+        }
+
         setloginState(localStorage.getItem('isLogin'));
         (async () => {
             getAllShops();
         })();
-    }, []);
+    }, [shopsList]);
 
     const getAllShops = () => {
         const getData = firebase.firestore().collection('autoShop');
