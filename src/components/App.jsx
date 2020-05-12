@@ -26,7 +26,7 @@ const App = () => {
     }, [shopsList]);
 
     const getAllShops = () => {
-        const getData = firebase.firestore().collection('autoShop');
+        const getData = firebase.firestore().collection('newShopList');
         getData.onSnapshot((snapshot) => {
             const allShop = snapshot.docs.map((shop) => ({
                 id: shop.id,

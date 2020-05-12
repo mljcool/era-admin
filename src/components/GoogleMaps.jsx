@@ -9,11 +9,11 @@ const mapContainerStyle = {
 const GoogleMaps = ({ selectedShopData }) => {
     const currentPosition = {
         lat: parseFloat(
-            (selectedShopData.functionalLocation || {}).latitude ||
+            (selectedShopData.shopLocation || {}).latitude ||
                 7.069250800000001
         ),
         lng: parseFloat(
-            (selectedShopData.functionalLocation || {}).longitude || 125.611285
+            (selectedShopData.shopLocation || {}).longitude || 125.611285
         ),
     };
     return (
@@ -29,7 +29,7 @@ const GoogleMaps = ({ selectedShopData }) => {
             >
                 <Marker
                     key={selectedShopData.id}
-                    title={selectedShopData.mainName}
+                    title={selectedShopData.name}
                     position={currentPosition}
                 />
             </GoogleMap>

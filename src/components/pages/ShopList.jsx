@@ -9,10 +9,17 @@ const ShopList = () => {
         UserContext
     );
 
+    const creatNewDate = (date) => {
+            
+
+        return new Date(date);
+    }
     return (
         <Fragment>
+          
             <div className='list-group' id='list-tab' role='tablist'>
                 {shopsList.map((data) => (
+                    
                     <a
                         key={data.uid}
                         className='list-group-item '
@@ -28,12 +35,12 @@ const ShopList = () => {
                                 : {}
                         }
                     >
-                        <small className='shop-date'>Monday 20, 2019</small>
+                        <small className='shop-date'>{data.dateCreated.toDate().toDateString()}</small>
                         <div className='d-flex justify-content-between align-items-center'>
                             <div className='title-list'>
                                 <FontAwesomeIcon icon={faCar} />
                                 <span className='shop-name'>
-                                    {data.mainName}
+                                    {data.name}
                                 </span>
                             </div>
                             <Badge status={data.status} />
